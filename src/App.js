@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
+import style from "./App.module.css";
 
 const App = () => {
   const [todoList, setTodoList] = React.useState([]);
@@ -16,15 +17,6 @@ const App = () => {
         },
       }
     )
-      // new Promise((resolve, reject) => {
-      //   setTimeout(() => {
-      //     resolve({
-      //       data: {
-      //         todoList: JSON.parse(localStorage.getItem("savedTodoList")) || [],
-      //       },
-      //     });
-      //   }, 2000);
-      // })
       .then((response) => response.json())
       .then((result) => {
         setTodoList(result.records);
@@ -54,15 +46,17 @@ const App = () => {
           path="/"
           exact
           element={
-            <>
+            <div className={style.wrapper}>
               <h1>Todo List</h1>
-              <AddTodoForm onAddTodo={addTodo} />
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-              )}
-            </>
+              <div className={style.contentContainer}>
+                <AddTodoForm onAddTodo={addTodo} />
+                {isLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                )}
+              </div>
+            </div>
           }
         ></Route>
         <Route path="/new" element={<h1>New Todo List</h1>}></Route>

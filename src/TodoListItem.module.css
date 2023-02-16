@@ -1,0 +1,26 @@
+.ListItem {
+  color: darkblue;
+  border-bottom: 2px solid #d1d3d4;
+  padding-bottom: 1%;
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  background-color: #8b65f3;
+  border: none;
+  border-radius: 4px;
+  padding: 1.5% 2%;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #a76ef7;
+  transition: 0.3s;
+}
+
+.button > svg > path {
+  stroke: #ffffff;
+}

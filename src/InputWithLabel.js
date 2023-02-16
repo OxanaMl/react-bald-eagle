@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./InputWithLabel.module.css";
 
 const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
   const inputRef = React.useRef();
@@ -15,6 +16,7 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
         value={todoTitle}
         onChange={handleTitleChange}
         ref={inputRef}
+        className={style.InputWithLabel}
       ></input>
     </>
   );

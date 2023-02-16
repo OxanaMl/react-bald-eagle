@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #c05ef8; /* fallback for old browsers */
+  background: linear-gradient(to top right, #b96adf, #8e68f6);
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.wrapper h1 {
+  color: white;
+  text-transform: uppercase;
+  position: relative;
+  top: 30%;
+  font-size: 2.7em;
+}
+
+.contentContainer {
+  margin: auto 0;
+}
