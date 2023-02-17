@@ -46,16 +46,14 @@ const App = () => {
           path="/"
           exact
           element={
-            <div className={style.wrapper}>
+            <div className={style.container}>
               <h1>Todo List</h1>
-              <div className={style.contentContainer}>
-                <AddTodoForm onAddTodo={addTodo} />
-                {isLoading ? (
-                  <p>Loading...</p>
-                ) : (
-                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-                )}
-              </div>
+              <AddTodoForm onAddTodo={addTodo} />
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              )}
             </div>
           }
         ></Route>
