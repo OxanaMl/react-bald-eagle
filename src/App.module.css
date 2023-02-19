@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #90e0ef; /* fallback for old browsers */
+  background: linear-gradient(to bottom right, #03045e, #caf0f8);
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+  color: #023047;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: white;
+  text-transform: uppercase;
+  position: relative;
+  top: 30%;
+  font-size: 2.7em;
+  font-weight: 600;
+}
+
+p {
+  color: white;
+}
+
+@media screen and (max-width: 676px) {
+  h1 {
+    font-size: 2em;
+  }
+}
