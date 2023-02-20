@@ -8,14 +8,13 @@ function AddTodoForm({ onAddTodo }) {
 
   function handleTitleChange(event) {
     const newTodoTitle = event.target.value;
-    console.log(newTodoTitle);
     setTodoTitle(newTodoTitle);
   }
 
   function handleAddTodo(event) {
     event.preventDefault();
     console.log(todoTitle);
-    onAddTodo({ title: todoTitle, id: Date.now() });
+    onAddTodo({ fields: { Title: todoTitle }, id: Date.now() });
     setTodoTitle("");
   }
 
