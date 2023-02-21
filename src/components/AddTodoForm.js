@@ -1,20 +1,20 @@
 import React from "react";
 import InputWithLabel from "./InputWithLabel";
 import style from "./AddTodoForm.module.css";
+import PropTypes from "prop-types";
 
 function AddTodoForm({ onAddTodo }) {
   const [todoTitle, setTodoTitle] = React.useState("");
 
   function handleTitleChange(event) {
     const newTodoTitle = event.target.value;
-    console.log(newTodoTitle);
     setTodoTitle(newTodoTitle);
   }
 
   function handleAddTodo(event) {
     event.preventDefault();
     console.log(todoTitle);
-    onAddTodo({ title: todoTitle, id: Date.now() });
+    onAddTodo({ fields: { Title: todoTitle }, id: Date.now() });
     setTodoTitle("");
   }
 
@@ -32,5 +32,9 @@ function AddTodoForm({ onAddTodo }) {
     </form>
   );
 }
+
+AddTodoForm.propTypes = {
+  onAddTodo: PropTypes.func,
+};
 
 export default AddTodoForm;
