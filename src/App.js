@@ -7,10 +7,13 @@ import style from "./App.module.css";
 const App = () => {
   const [todoList, setTodoList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [sortOrder, setSortOrder] = React.useState("asc");
 
   React.useEffect(() => {
     fetch(
       `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`,
+      // Sorting with Airtable URL query parameters
+      // `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -19,10 +22,34 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((result) => {
+        if (sortOrder === "asc") {
+          // Sorting in ascending alphabetical order by "Title" (A-to-Z)
+          result.records.sort((objectA, objectB) => {
+            if (objectA.fields.Title > objectB.fields.Title) {
+              return 1;
+            } else if (objectA.fields.Title < objectB.fields.Title) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
+        } else if (sortOrder === "desc") {
+          // Sorting in descending alphabetical order by "Title" (A-to-Z)
+          result.records.sort((objectA, objectB) => {
+            if (objectA.fields.Title < objectB.fields.Title) {
+              return 1;
+            } else if (objectA.fields.Title > objectB.fields.Title) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
+        }
+
         setTodoList(result.records);
         setIsLoading(false);
       });
-  }, []);
+  }, [sortOrder]);
 
   React.useEffect(() => {
     if (isLoading === false) {
@@ -39,6 +66,10 @@ const App = () => {
     setTodoList(newTodoList);
   };
 
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -52,7 +83,15 @@ const App = () => {
               {isLoading ? (
                 <p>Loading...</p>
               ) : (
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                <>
+                  <button
+                    onClick={toggleSortOrder}
+                    className={style.toggleButton}
+                  >
+                    {sortOrder === "asc" ? "Sort Z-A" : "Sort A-Z"}
+                  </button>
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                </>
               )}
             </div>
           }
