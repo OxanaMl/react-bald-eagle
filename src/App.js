@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddTodoForm from "./components/AddTodoForm";
 import TodoList from "./components/TodoList";
@@ -10,6 +10,47 @@ const App = () => {
   const [sortOrder, setSortOrder] = React.useState("asc");
 
   const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+
+  const sortByTitle = useCallback(
+    (list) => {
+      if (sortOrder === "asc") {
+        // Sorting in ascending alphabetical order by "Title" (A-to-Z)
+        list.sort((objectA, objectB) => {
+          if (
+            objectA.fields.Title.toLowerCase() >
+            objectB.fields.Title.toLowerCase()
+          ) {
+            return 1;
+          } else if (
+            objectA.fields.Title.toLowerCase() <
+            objectB.fields.Title.toLowerCase()
+          ) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+      } else if (sortOrder === "desc") {
+        // Sorting in descending alphabetical order by "Title" (Z-to-A)
+        list.sort((objectA, objectB) => {
+          if (
+            objectA.fields.Title.toLowerCase() <
+            objectB.fields.Title.toLowerCase()
+          ) {
+            return 1;
+          } else if (
+            objectA.fields.Title.toLowerCase() >
+            objectB.fields.Title.toLowerCase()
+          ) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+      }
+    },
+    [sortOrder]
+  );
 
   // GET data from Airtable
   React.useEffect(() => {
@@ -25,34 +66,11 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((result) => {
-        if (sortOrder === "asc") {
-          // Sorting in ascending alphabetical order by "Title" (A-to-Z)
-          result.records.sort((objectA, objectB) => {
-            if (objectA.fields.Title > objectB.fields.Title) {
-              return 1;
-            } else if (objectA.fields.Title < objectB.fields.Title) {
-              return -1;
-            } else {
-              return 0;
-            }
-          });
-        } else if (sortOrder === "desc") {
-          // Sorting in descending alphabetical order by "Title" (Z-to-A)
-          result.records.sort((objectA, objectB) => {
-            if (objectA.fields.Title < objectB.fields.Title) {
-              return 1;
-            } else if (objectA.fields.Title > objectB.fields.Title) {
-              return -1;
-            } else {
-              return 0;
-            }
-          });
-        }
-
+        sortByTitle(result.records);
         setTodoList(result.records);
         setIsLoading(false);
       });
-  }, [url, sortOrder]);
+  }, [url, sortByTitle]);
 
   React.useEffect(() => {
     if (isLoading === false) {
@@ -76,7 +94,9 @@ const App = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        setTodoList([...todoList, result]);
+        let updatedList = [...todoList, result];
+        sortByTitle(updatedList);
+        setTodoList(updatedList);
       });
   };
 
