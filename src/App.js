@@ -9,11 +9,14 @@ const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [sortOrder, setSortOrder] = React.useState("asc");
 
+  const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+
+  // GET data from Airtable
   React.useEffect(() => {
     fetch(
-      `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`,
+      url,
       // Sorting with Airtable URL query parameters
-      // `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`,
+      // `${url}?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -34,7 +37,7 @@ const App = () => {
             }
           });
         } else if (sortOrder === "desc") {
-          // Sorting in descending alphabetical order by "Title" (A-to-Z)
+          // Sorting in descending alphabetical order by "Title" (Z-to-A)
           result.records.sort((objectA, objectB) => {
             if (objectA.fields.Title < objectB.fields.Title) {
               return 1;
@@ -49,7 +52,7 @@ const App = () => {
         setTodoList(result.records);
         setIsLoading(false);
       });
-  }, [sortOrder]);
+  }, [url, sortOrder]);
 
   React.useEffect(() => {
     if (isLoading === false) {
@@ -57,11 +60,35 @@ const App = () => {
     }
   }, [todoList, isLoading]);
 
+  // POST data to Airtable
   const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        fields: {
+          Title: newTodo.fields.Title,
+        },
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setTodoList([...todoList, result]);
+      });
   };
 
+  // DELETE data from Airtable
   const removeTodo = (id) => {
+    fetch(`${url}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+      },
+    }).then((response) => response.json());
+
     const newTodoList = todoList.filter((listItem) => listItem.id !== id);
     setTodoList(newTodoList);
   };
