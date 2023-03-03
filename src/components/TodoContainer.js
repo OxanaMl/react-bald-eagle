@@ -2,13 +2,14 @@ import React, { useCallback } from "react";
 import AddTodoForm from "./AddTodoForm.js";
 import TodoList from "./TodoList";
 import style from "./TodoContainer.module.css";
+import PropTypes from "prop-types";
 
-const TodoContainer = () => {
+const TodoContainer = ({ tableName }) => {
   const [todoList, setTodoList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [sortOrder, setSortOrder] = React.useState("asc");
 
-  const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+  const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}`;
 
   const sortByTitle = useCallback(
     (list) => {
@@ -118,8 +119,8 @@ const TodoContainer = () => {
 
   return (
     <div className={style.container}>
-      <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
+      <h1>{tableName}</h1>
+      <AddTodoForm tableName={tableName} onAddTodo={addTodo} />
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -132,6 +133,10 @@ const TodoContainer = () => {
       )}
     </div>
   );
+};
+
+TodoContainer.propTypes = {
+  tableName: PropTypes.string,
 };
 
 export default TodoContainer;
