@@ -174,12 +174,21 @@ const TodoContainer = ({ tableName }) => {
         <p>Loading...</p>
       ) : (
         <>
-          <button onClick={toggleSortOrderAlph} className={style.toggleButton}>
-            {sortOrderAlph === "asc" ? "Sort Z-A ▲" : "Sort A-Z ▼"}
-          </button>
-          <button onClick={toggleSortOrderDate} className={style.toggleButton}>
-            {sortOrderDate === "new" ? "Old to New ▲" : "New to Old ▼"}
-          </button>
+          <div className={style.sortBtnContainer}>
+            <p>Sort:</p>
+            <button
+              onClick={toggleSortOrderAlph}
+              className={style.toggleButton}
+            >
+              {sortOrderAlph === "asc" ? "▲ Z to A" : "▼ A to Z"}
+            </button>
+            <button
+              onClick={toggleSortOrderDate}
+              className={style.toggleButton}
+            >
+              {sortOrderDate === "new" ? "▲ Old to New" : "▼ New to Old"}
+            </button>
+          </div>
           <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
         </>
       )}

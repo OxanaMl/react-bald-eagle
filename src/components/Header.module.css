@@ -1,4 +1,44 @@
-.link {
+.logo {
+  background-color: #5e37ff;
+  border-radius: 20px;
+  padding: 2% 12%;
+  text-align: center;
+  display: inline-block;
+}
+
+.logo h1 {
   color: white;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2%;
+  margin-top: 15%;
+}
+
+.link {
   margin-right: 2%;
+  text-decoration: none;
+  color: #b7b9e5;
+  font-weight: 500;
+  line-height: 3.5;
+  font-size: 1.2em;
+}
+
+.link:hover {
+  color: #5e37ff;
+}
+
+.active {
+  color: #5e37ff;
+  font-weight: bold;
+}
+
+.link > svg > path {
+  stroke: #b7b9e5;
+}
+
+.link > svg {
+  margin-right: 3%;
 }

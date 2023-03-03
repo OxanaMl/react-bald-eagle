@@ -1,25 +1,56 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import style from "./Header.module.css";
+import { ReactComponent as Home } from "../icons/home.svg";
+import { ReactComponent as Work } from "../icons/work.svg";
+import { ReactComponent as Studying } from "../icons/studying.svg";
+import { ReactComponent as Personal } from "../icons/personal.svg";
 
 const Header = () => {
   return (
     <div>
-      <p>Todo List</p>
+      <div className={style.logo}>
+        <h1>Todo List</h1>
+      </div>
       <nav>
         <ul>
-          <Link to="/" className={style.link}>
+          <NavLink
+            className={({ isActive }) =>
+              `${style.link} ${isActive ? style.active : ""}`
+            }
+            exact
+            to="/"
+          >
+            <Home height="23px" width="23px" stroke="#ffffff" />
             Home
-          </Link>
-          <Link to="/work" className={style.link}>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${style.link} ${isActive ? style.active : ""}`
+            }
+            to="/work"
+          >
+            <Work height="23px" width="23px" stroke="#ffffff" />
             Work
-          </Link>
-          <Link to="/studying" className={style.link}>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${style.link} ${isActive ? style.active : ""}`
+            }
+            to="/studying"
+          >
+            <Studying height="23px" width="23px" stroke="#ffffff" />
             Studying
-          </Link>
-          <Link to="/personal" className={style.link}>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${style.link} ${isActive ? style.active : ""}`
+            }
+            to="/personal"
+          >
+            <Personal height="23px" width="23px" />
             Personal
-          </Link>
+          </NavLink>
         </ul>
       </nav>
     </div>

@@ -1,0 +1,24 @@
+.appContainer {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1% 3%;
+}
+
+.headerContainer {
+  flex: 1;
+}
+
+.contentContainer {
+  background-color: #d9d8f6;
+  border-radius: 50px;
+  height: 96vh;
+  width: 100%;
+  flex: 3;
+}
+
+/*
+Light purple colors:
+edf2fb
+e6dff1
+
+*/

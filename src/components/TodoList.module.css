@@ -1,10 +1,10 @@
 .TodoList {
   background-color: white;
-  width: 40%;
+  width: 60%;
   min-width: 450px;
-  padding: 1.5% 3% 2%;
-  border-radius: 5px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  padding: 2% 4% 4%;
+  border-radius: 25px;
+  /* box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); */
 
   list-style-type: none;
 }
