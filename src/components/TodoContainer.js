@@ -7,13 +7,16 @@ import PropTypes from "prop-types";
 const TodoContainer = ({ tableName }) => {
   const [todoList, setTodoList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [sortOrder, setSortOrder] = React.useState("asc");
+  const [sortOrderAlph, setSortOrderAlph] = React.useState("desc");
+  const [sortOrderDate, setSortOrderDate] = React.useState("new");
+  const [sortCriteria, setSortCriteria] = React.useState("byDate");
 
   const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}`;
 
+  // Sort by title function
   const sortByTitle = useCallback(
     (list) => {
-      if (sortOrder === "asc") {
+      if (sortOrderAlph === "asc") {
         // Sorting in ascending alphabetical order by "Title" (A-to-Z)
         list.sort((objectA, objectB) => {
           if (
@@ -30,7 +33,7 @@ const TodoContainer = ({ tableName }) => {
             return 0;
           }
         });
-      } else if (sortOrder === "desc") {
+      } else if (sortOrderAlph === "desc") {
         // Sorting in descending alphabetical order by "Title" (Z-to-A)
         list.sort((objectA, objectB) => {
           if (
@@ -49,7 +52,37 @@ const TodoContainer = ({ tableName }) => {
         });
       }
     },
-    [sortOrder]
+    [sortOrderAlph]
+  );
+
+  // Sort by date function
+  const sortByDate = useCallback(
+    (list) => {
+      if (sortOrderDate === "new") {
+        // Sorting in descending order by "Date" (new-to-old)
+        list.sort((objectA, objectB) => {
+          if (objectA.createdTime > objectB.createdTime) {
+            return -1;
+          } else if (objectA.createdTime < objectB.createdTime) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      } else if (sortOrderDate === "old") {
+        // Sorting in ascending order by "Date" (old-to-new)
+        list.sort((objectA, objectB) => {
+          if (objectA.createdTime < objectB.createdTime) {
+            return -1;
+          } else if (objectA.createdTime > objectB.createdTime) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      }
+    },
+    [sortOrderDate]
   );
 
   // GET data from Airtable
@@ -66,11 +99,15 @@ const TodoContainer = ({ tableName }) => {
     )
       .then((response) => response.json())
       .then((result) => {
-        sortByTitle(result.records);
+        if (sortCriteria === "byDate") {
+          sortByDate(result.records);
+        } else {
+          sortByTitle(result.records);
+        }
         setTodoList(result.records);
         setIsLoading(false);
       });
-  }, [url, sortByTitle]);
+  }, [url, sortByDate, sortByTitle, sortCriteria]);
 
   React.useEffect(() => {
     if (isLoading === false) {
@@ -95,7 +132,11 @@ const TodoContainer = ({ tableName }) => {
       .then((response) => response.json())
       .then((result) => {
         let updatedList = [...todoList, result];
-        sortByTitle(updatedList);
+        if (sortCriteria === "byDate") {
+          sortByDate(updatedList);
+        } else {
+          sortByTitle(updatedList);
+        }
         setTodoList(updatedList);
       });
   };
@@ -113,8 +154,16 @@ const TodoContainer = ({ tableName }) => {
     setTodoList(newTodoList);
   };
 
-  const toggleSortOrder = () => {
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  // Toggle button to sort by alphabet
+  const toggleSortOrderAlph = () => {
+    setSortOrderAlph(sortOrderAlph === "asc" ? "desc" : "asc");
+    setSortCriteria("byTitle");
+  };
+
+  // Toggle button to sort by date
+  const toggleSortOrderDate = () => {
+    setSortOrderDate(sortOrderDate === "new" ? "old" : "new");
+    setSortCriteria("byDate");
   };
 
   return (
@@ -125,8 +174,11 @@ const TodoContainer = ({ tableName }) => {
         <p>Loading...</p>
       ) : (
         <>
-          <button onClick={toggleSortOrder} className={style.toggleButton}>
-            {sortOrder === "asc" ? "Sort Z-A" : "Sort A-Z"}
+          <button onClick={toggleSortOrderAlph} className={style.toggleButton}>
+            {sortOrderAlph === "asc" ? "Sort Z-A ▲" : "Sort A-Z ▼"}
+          </button>
+          <button onClick={toggleSortOrderDate} className={style.toggleButton}>
+            {sortOrderDate === "new" ? "Old to New ▲" : "New to Old ▼"}
           </button>
           <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
         </>
