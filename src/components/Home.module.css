@@ -1,0 +1,35 @@
+.homeContainer {
+  padding: 8%;
+}
+
+.homeContainer h1 {
+  color: blue;
+  margin-bottom: 3%;
+  font-weight: 600;
+  font-size: 1.9em;
+}
+
+.homeContainer p {
+  font-size: 1.3em;
+}
+
+.getStartedButton {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  color: #5e37ff;
+  border: 2px solid #5e37ff;
+  background-color: transparent;
+  border-radius: 17px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 2% 5%;
+  margin-top: 5%;
+  min-width: 170px;
+  display: inline-block;
+}
+
+.getStartedButton:hover {
+  color: white;
+  background-color: #5e37ff;
+  transition: 0.5s;
+}

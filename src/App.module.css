@@ -1,51 +1,38 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #90e0ef; /* fallback for old browsers */
-  background: linear-gradient(to bottom right, #03045e, #caf0f8);
-  background-attachment: fixed;
-  font-family: "Poppins", sans-serif;
-  color: #023047;
-}
-
-.container {
+.appContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-evenly;
+  padding: 1% 3%;
 }
 
-h1 {
-  color: white;
-  text-transform: uppercase;
-  position: relative;
-  top: 30%;
-  font-size: 2.7em;
-  font-weight: 600;
+.headerContainer {
+  flex: 1;
 }
 
-p {
-  color: white;
+.contentContainer {
+  background-color: #d9d8f6;
+  border-radius: 50px;
+  padding-bottom: 2%;
+  width: 100%;
+  flex: 3;
+  min-height: 96vh;
 }
 
-.toggleButton {
-  font-family: "Poppins", sans-serif;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 1em;
-  padding: 0.4rem 1.2rem;
-  border: none;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.toggleButton:hover {
-  background-color: #caf0f8;
-  transition: 0.3s;
+@media (max-width: 1024px) {
+  .appContainer {
+    flex-direction: column;
+  }
+  .contentContainer {
+    padding-bottom: 7%;
+    border-radius: 10px;
+  }
 }
 
 @media screen and (max-width: 676px) {
-  h1 {
-    font-size: 2em;
+  .TodoList {
+    width: 95%;
+    min-width: 350px;
+  }
+  .appContainer {
+    flex-direction: column;
   }
 }

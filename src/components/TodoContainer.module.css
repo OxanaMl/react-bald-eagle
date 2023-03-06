@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container h1 {
+  color: #1e223e;
+  margin: 2% auto;
+  font-size: 2.1em;
+  font-weight: 600;
+}
+
+.sortBtnContainer {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  justify-content: center;
+  gap: 2%;
+  margin: 2% auto;
+}
+.sortBtnContainer p {
+  color: #9a9bcd;
+  font-weight: bold;
+}
+
+.toggleButton {
+  font-family: "Poppins", sans-serif;
+  color: #5e37ff;
+  cursor: pointer;
+  border: 2px solid #5e37ff;
+  background-color: transparent;
+  border-radius: 17px;
+  font-size: 1em;
+  padding: 2% 5%;
+  min-width: 170px;
+}
+
+.toggleButton:hover {
+  background-color: #b8b8ff;
+  transition: 0.3s;
+}
+.toggleButton:active {
+  color: #5e37ff;
+}
+
+@media (max-width: 1024px) {
+  .container h1 {
+    font-size: 1.7em;
+    margin: 2%;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  h1 {
+    font-size: 2em;
+  }
+}

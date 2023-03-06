@@ -1,7 +1,9 @@
 .InputWithLabel {
   width: 70%;
-  padding: 1.5% 2%;
+  padding: 1.7% 2%;
   font-family: "Poppins", sans-serif;
   margin-left: 1%;
   font-size: 1em;
+  border: 1px solid #d1d3d4;
+  border-radius: 15px;
 }

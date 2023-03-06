@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./TodoListItem.module.css";
-import { ReactComponent as Delete } from "../delete.svg";
+import { ReactComponent as Delete } from "../icons/delete.svg";
 import PropTypes from "prop-types";
 
 function TodoListItem({ todo, onRemoveTodo }) {
