@@ -16,9 +16,23 @@
   flex: 3;
 }
 
-/*
-Light purple colors:
-edf2fb
-e6dff1
+@media (max-width: 1024px) {
+  .appContainer {
+    flex-direction: column;
+  }
+  .contentContainer {
+    padding-bottom: 7%;
+    border-radius: 10px;
+    height: 100vh;
+  }
+}
 
-*/
+@media screen and (max-width: 676px) {
+  .TodoList {
+    width: 95%;
+    min-width: 350px;
+  }
+  .appContainer {
+    flex-direction: column;
+  }
+}

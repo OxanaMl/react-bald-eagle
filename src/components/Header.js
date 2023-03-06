@@ -8,7 +8,7 @@ import { ReactComponent as Personal } from "../icons/personal.svg";
 
 const Header = () => {
   return (
-    <div>
+    <div className={style.headerWrapper}>
       <div className={style.logo}>
         <h1>Todo List</h1>
       </div>

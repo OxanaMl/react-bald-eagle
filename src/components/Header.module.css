@@ -42,3 +42,49 @@ nav ul {
 .link > svg {
   margin-right: 3%;
 }
+
+@media only screen and (min-device-width: 768px) and (max-width: 1024px) {
+  .logo h1 {
+    font-size: 1.8em;
+  }
+  .logo {
+    padding: 2% 7%;
+  }
+  nav ul {
+    flex-direction: row;
+    margin-left: 2%;
+    margin-top: 2%;
+    min-width: 450px;
+  }
+  .link {
+    line-height: 1.5;
+    text-align: center;
+  }
+  .headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  .logo {
+    padding: 2% 7%;
+  }
+  .logo h1 {
+    font-size: 1.5em;
+  }
+  .appContainer {
+    flex-direction: column;
+  }
+  nav ul {
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    flex-direction: row;
+  }
+  .link {
+    line-height: 1;
+    text-align: center;
+  }
+}

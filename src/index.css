@@ -9,3 +9,15 @@ body {
   color: #023047;
   overflow: hidden;
 }
+
+@media (max-width: 1024px) {
+  body {
+    overflow: visible;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  body {
+    overflow: visible;
+  }
+}

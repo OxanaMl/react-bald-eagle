@@ -48,6 +48,13 @@ h1 {
   color: #5e37ff;
 }
 
+@media (max-width: 1024px) {
+  .container h1 {
+    font-size: 1.7em;
+    margin: 2%;
+  }
+}
+
 @media screen and (max-width: 676px) {
   h1 {
     font-size: 2em;
