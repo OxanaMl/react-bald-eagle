@@ -5,6 +5,8 @@
 .homeContainer h1 {
   color: blue;
   margin-bottom: 3%;
+  font-weight: 600;
+  font-size: 1.9em;
 }
 
 .homeContainer p {

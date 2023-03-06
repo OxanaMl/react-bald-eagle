@@ -18,7 +18,7 @@ const Header = () => {
             className={({ isActive }) =>
               `${style.link} ${isActive ? style.active : ""}`
             }
-            exact
+            exact="true"
             to="/"
           >
             <Home height="23px" width="23px" stroke="#ffffff" />
