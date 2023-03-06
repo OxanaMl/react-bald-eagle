@@ -11,9 +11,10 @@
 .contentContainer {
   background-color: #d9d8f6;
   border-radius: 50px;
-  height: 96vh;
+  padding-bottom: 2%;
   width: 100%;
   flex: 3;
+  min-height: 96vh;
 }
 
 @media (max-width: 1024px) {
@@ -23,7 +24,6 @@
   .contentContainer {
     padding-bottom: 7%;
     border-radius: 10px;
-    height: 100vh;
   }
 }
 
